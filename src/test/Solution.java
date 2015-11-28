@@ -19,6 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
@@ -448,38 +449,60 @@ public class Solution extends Thread {
 	     }
 	    
 	    
-	    public static ListNode reverse(ListNode head){
-	    	if(head==null||head.next==null) return head;
-	    	ListNode p1=null, p2=head, p3=head.next;
-	    	while(p2!=null){
-	    		p2.next=p1;
-	    		p1=p2;
-	    		p2=p3;
-	    		p3= (p3==null?null:p3.next);
-	    	}
-	    	return p1;
+	 public boolean wordPattern(String pattern, String str) {
+	   String[] strs=str.split(" ");
+	   if(strs.length!=pattern.length()) return false;
+	   Map<Object,Integer> indexMap=new HashMap<>();
+	   for(int i=0;i<pattern.length();++i){
+		   Object a=indexMap.put(pattern.charAt(i),i);
+		   Object b=indexMap.put(strs[i],i);
+		   if(!Objects.equals(a, b)) return false;
+		  //if( !Objects.equals(indexMap.put(pattern.charAt(i),i),(indexMap.put(strs[i],i)))) return false;
+		   //if (!Objects.equals(indexMap.put(pattern.charAt(i), i),indexMap.put(strs[i], i))) return false;
+	   }
+	   return true;
+	 }
+	
+	    int[][] dp;
+
+	    public void NumMatrix(int[][] matrix) {
+	        if(matrix==null||matrix.length==0||matrix[0].length==0) return;
+	        int m=matrix.length, n=matrix[0].length;
+	        dp=new int[m+1][n+1];
+	        for(int i=1;i<=m;++i){
+	            for(int j=1;j<=n;++j){
+	                dp[i][j]=dp[i-1][j]+dp[i][j-1]-dp[i-1][j-1]+matrix[i-1][j-1];
+	            }
+	        }
 	    }
+
+	    public int sumRegion(int row1, int col1, int row2, int col2) {
+	        return dp[row2+1][col2+1]-dp[row2+1][col1]-dp[row1][col2+1]+dp[row1][col1];
+	    }
+	
+	
+	
+	
     public static void main(String[] args) throws IOException{
     	Solution solution=new Solution();
-        ListNode l1=new ListNode(0);
-        l1.next=new ListNode(1);
 
+       int[][] matrix={
+    		   {1},
+    		   {-1}
+       };
+       
+       solution.NumMatrix(matrix);
+       System.out.println(solution.sumRegion(0,0,0,0));
+       System.out.println(solution.sumRegion(1,0,1,0));
+       System.out.println(solution.sumRegion(0,0,1,0));
+
+        
+        
       //  System.out.println(solution. diffWaysToCompute("2*3-4*5"));
     	
+
     	
-    	ListNode l2=new ListNode(9);
-    	l2.next=new ListNode(9);
-    	l2.next.next=new ListNode(9);
-    	
-    	
-    	int[][] req={{1,0},{2,0},{3,1},{3,2}};
-//    	int[] res=solution.findOrder(4, req);
-    	int[] nums={1,2,4,3};
-    	int[][] b=new int[][]{{0,1,2,3},{4,5,6,7},{8,9,10,11},{12,13,14,15},{16,17,18,19}};
-        solution.nextPermutation(nums);
-        for(int n:nums){
-        	System.out.print(n+" ");
-        }
+
     	//solution.getSkyline(b);
     	//System.out.println(solution.permute(nums));
 //    	System.out.println(solution.spiralOrder(b));

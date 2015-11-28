@@ -3,6 +3,7 @@ package test;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Stack;
+import java.util.concurrent.TimeUnit;
 
 public class CC150ch2LinkedList {
   //2.1 remove duplicates from unsorted linked list	o(n):o(n)
@@ -132,6 +133,13 @@ public class CC150ch2LinkedList {
   
   public static void main(String[] args){
 	  
+	try {
+		Thread.sleep(10);
+		TimeUnit.SECONDS.sleep(1);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	 
 	 
 	//2.1 remove duplicates from unsorted linked list
