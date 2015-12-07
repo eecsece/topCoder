@@ -35,11 +35,11 @@ public class HackerrankEnv {
 			if(map.containsKey(score)) map.get(score).count++;
 			else {
 				ScoreNode node=new ScoreNode(score);
-				if(p.left==null)
+				
 				map.put(score, node);
 			}
 		}
-		return null;
+		
 	}
 
 	public static void print(int n){
