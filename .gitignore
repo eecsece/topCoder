@@ -1,0 +1,7 @@
+*.in
+*.out
+*.log
+test.iml
+./idea
+./bin
+./settings
