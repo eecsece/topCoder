@@ -35,9 +35,12 @@ public class AlgoSort {
 	
 	// insertiong sort: like sort cards in hand
 	// o(n^2):o(1) stable, good for small amount or almost sorted except a few
+	//follow up: we could use binary search to locate where the card should be inserted, could reduce to o(nlgn)
 	public static void insertionSort(int[] A){
 		for(int i=1;i<A.length;++i){
 			int j=i-1, temp=A[i];
+			//loc=binarySearch(A,temp); 
+			//while(j>=loc)
 			while(j>=0 && A[j]>temp) {
 				A[j+1]=A[j];
 				j--;
@@ -293,6 +296,10 @@ public class AlgoSort {
 		}
 		return res;
 	}
+	
+	
+	
+	 
 
 	public static void main(String[] args){	
 		
@@ -307,8 +314,8 @@ public class AlgoSort {
 //		int[] nums2={10,20,30,40};
 //		System.out.println(closestPair(nums1,nums2,50)[0]+" "+closestPair(nums1,nums2,50)[1]);
 		
-	    int[] arr={10, 5, 6, 3, 2, 20, 100, 80};
-	    System.out.println(kthLargest(arr,8));
+//	    int[] arr={10, 5, 6, 3, 2, 20, 100, 80};
+//	    System.out.println(kthLargest(arr,8));
 
 		float[] E={0.78f,0.17f,0.39f,0.26f,0.72f,0.94f,0.21f,0.12f,0.23f,0.68f};
 		int[] B={1,3,2,4};
