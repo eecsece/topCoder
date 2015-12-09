@@ -240,6 +240,7 @@ public class AlgoSort {
 	
 	
 	//kth largest with quickSelect
+	//o(n) for partition, o(lgn) for select: total o(n)
 	public static int kthLargest(int[] A, int k){
 		if(A==null || A.length==0|| k<=0 || k>A.length) return Integer.MAX_VALUE;
 		//return quickSelect(A,0,A.length-1,A.length-k);//kth largest(1 base)== n-kth smallest(0 base)
@@ -275,13 +276,36 @@ public class AlgoSort {
 		}
 		return res;
 	}
+	
+	//find common elems in 3 sorted arrays
+	//o(n):o(1)
+	public static List<Integer> findCommons(int[] nums1, int[] nums2, int[] nums3){
+		List<Integer> res=new ArrayList<>();
+		int i=0,j=0,k=0;
+		while(i<nums1.length && j<nums2.length && k<nums3.length){
+			if(nums1[i]==nums2[j] && nums2[j]==nums2[k]) {
+				res.add(nums1[i]);
+				i++;j++;k++;
+			}
+			else if(nums1[i]<nums2[j]) i++;
+			else if(nums2[j]<nums3[k]) j++;
+			else k++;			
+		}
+		return res;
+	}
 
-	public static void main(String[] args){		
+	public static void main(String[] args){	
+		
+		//find common elems in 3 sorted arrays
+//		int ar1[] = {1, 5, 10, 20, 40, 80};
+//	    int ar2[] = {6, 7, 20, 80, 100};
+//	    int ar3[] = {3, 4, 15, 20, 30, 70, 80, 120};
+//	    System.out.println(findCommons(ar1,ar2,ar3));
 		
 		//find closest pair of x in two sorted arrays
-		int[] nums1={1,4,5,7};
-		int[] nums2={10,20,30,40};
-		System.out.println(closestPair(nums1,nums2,50)[0]+" "+closestPair(nums1,nums2,50)[1]);
+//		int[] nums1={1,4,5,7};
+//		int[] nums2={10,20,30,40};
+//		System.out.println(closestPair(nums1,nums2,50)[0]+" "+closestPair(nums1,nums2,50)[1]);
 		
 	    int[] arr={10, 5, 6, 3, 2, 20, 100, 80};
 	    System.out.println(kthLargest(arr,8));
