@@ -256,9 +256,33 @@ public class AlgoSort {
 		return Integer.MAX_VALUE;		
 	}
     
+	//find closest pair of x in two sorted arrays
+	public static int[] closestPair(int[] nums1, int[] nums2, int x){
+		//o(n):o(1)
+		int diff =Integer.MAX_VALUE;
+		int l=0, r=nums2.length-1;
+		int[] res=new int[2];
+		while(l<nums1.length && r>=0){
+			int sum=nums1[l]+nums2[r];
+			int localDiff=Math.abs(sum-x);
+			if(localDiff<diff){
+				res[0]=nums1[l];
+				res[1]=localDiff;
+			}
+			if(sum==x) return res;
+			else if(sum<x) l++;
+			else r--;	
+		}
+		return res;
+	}
 
-
-	public static void main(String[] args){		 
+	public static void main(String[] args){		
+		
+		//find closest pair of x in two sorted arrays
+		int[] nums1={1,4,5,7};
+		int[] nums2={10,20,30,40};
+		System.out.println(closestPair(nums1,nums2,50)[0]+" "+closestPair(nums1,nums2,50)[1]);
+		
 	    int[] arr={10, 5, 6, 3, 2, 20, 100, 80};
 	    System.out.println(kthLargest(arr,8));
 
