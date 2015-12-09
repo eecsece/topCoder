@@ -1,5 +1,7 @@
 package test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -16,6 +18,7 @@ public class AlgoSort {
 	
     // bubble sort:repeatedly swapping adjacent elems if they are in wrong order
 	//stable,  o(n^2):o(1) , it takes minimal time if already sorted
+	//use swapped flag to indicate if it is already sorted
 	public static void bubbleSort(int[] A){
 		int n=A.length;
 		for(int i=0;i<n;++i){
@@ -222,11 +225,7 @@ public class AlgoSort {
 					
 				}
 			}
-		}
-		
-
-		
-		
+		}		
 	}
 	
 	public static int[][] generateBomb(int n){
@@ -240,9 +239,28 @@ public class AlgoSort {
 	}
 	
 	
-	public static void main(String[] args){
-		
-		
+	//kth largest with quickSelect
+	public static int kthLargest(int[] A, int k){
+		if(A==null || A.length==0|| k<=0 || k>A.length) return Integer.MAX_VALUE;
+		//return quickSelect(A,0,A.length-1,A.length-k);//kth largest(1 base)== n-kth smallest(0 base)
+		return quickSelect(A,0,A.length-1,k-1); //this is for kth smallest
+	}
+	
+	public static int quickSelect(int[] A, int l, int r, int k){
+		if(l<=r){
+			int p=partition(A,l,r);
+			if(p==k) return A[p];
+			if(p>k) return quickSelect(A,l,p-1,k);
+			return quickSelect(A,p+1,r,k);//note dont change k
+		}
+		return Integer.MAX_VALUE;		
+	}
+    
+
+
+	public static void main(String[] args){		 
+	    int[] arr={10, 5, 6, 3, 2, 20, 100, 80};
+	    System.out.println(kthLargest(arr,8));
 
 		float[] E={0.78f,0.17f,0.39f,0.26f,0.72f,0.94f,0.21f,0.12f,0.23f,0.68f};
 		int[] B={1,3,2,4};
